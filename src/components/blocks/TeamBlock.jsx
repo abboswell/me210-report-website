@@ -1,3 +1,4 @@
+import { resolveAssetPath } from "../../utils/assetPath";
 import { ExternalLink } from "lucide-react";
 
 function InitialBadge({ name }) {
@@ -34,7 +35,7 @@ export default function TeamBlock({ block }) {
               <div className="mx-auto aspect-[4/5] w-full overflow-hidden rounded-[1.5rem] bg-white ring-1 ring-black/5">
                 {member.image ? (
                   <img
-                    src={member.image}
+                    src={resolveAssetPath(member.image)}
                     alt={member.name}
                     className="h-full w-full object-contain bg-white"
                   />

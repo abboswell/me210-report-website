@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { classNames } from "../../utils/classNames";
+import { resolveAssetPath } from "../../utils/assetPath";
 
 export default function ImageCard({ item, aspect = "aspect-[16/10]", tall = false }) {
   const [failed, setFailed] = useState(false);
   const hasImage = item?.src && !failed;
   const fit = item?.fit === "cover" ? "object-cover" : "object-contain bg-slate-50";
   const imagePadding = item?.fit === "cover" ? "" : item?.compact ? "p-2" : "p-3";
+  const resolvedSrc = resolveAssetPath(item?.src);
 
   return (
     <div className="group overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_14px_60px_rgba(0,0,0,0.08)]">
       <div className={classNames("relative overflow-hidden bg-slate-100", tall ? item?.heightClass || "min-h-[520px]" : aspect)}>
         {hasImage ? (
           <img
-            src={item.src}
+            src={resolvedSrc}
             alt={item.alt || item.label || "Report image"}
             className={`h-full w-full transition duration-500 group-hover:scale-[1.01] ${fit} ${imagePadding}`}
             onError={() => setFailed(true)}

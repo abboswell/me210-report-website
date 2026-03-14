@@ -1,5 +1,7 @@
+import { resolveAssetPath } from "../../utils/assetPath";
+
 export default function PdfBlock({ block }) {
-  const pdfSrc = `${block.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
+  const pdfSrc = `${resolveAssetPath(block.src)}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
 
   return (
     <div className="rounded-[2rem] border border-black/5 bg-white p-6 shadow-[0_14px_60px_rgba(0,0,0,0.07)] sm:p-8">

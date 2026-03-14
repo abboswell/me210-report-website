@@ -1,15 +1,18 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown, Download, FileCode2 } from "lucide-react";
+import { resolveAssetPath } from "../../utils/assetPath";
 
 export default function CodeFileBlock({ block }) {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const resolvedSrc = resolveAssetPath(block.src);
+
   useEffect(() => {
     let mounted = true;
-    fetch(block.src)
+    fetch(resolvedSrc)
       .then((res) => res.text())
       .then((text) => {
         if (!mounted) return;
@@ -24,7 +27,7 @@ export default function CodeFileBlock({ block }) {
     return () => {
       mounted = false;
     };
-  }, [block.src]);
+  }, [resolvedSrc]);
 
   return (
     <div className="rounded-[2rem] border border-black/5 bg-white p-6 shadow-[0_14px_60px_rgba(0,0,0,0.07)] sm:p-8">
@@ -39,7 +42,7 @@ export default function CodeFileBlock({ block }) {
           ) : null}
         </div>
         <a
-          href={block.src}
+          href={resolvedSrc}
           download
           className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
         >
