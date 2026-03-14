@@ -21,7 +21,3 @@ npm run dev
 4. Push to `main`.
 5. GitHub Actions will build and publish the site automatically.
 
-## Notes
-
-- The Vite `base` is already set correctly for this repo.
-- Static assets in `public/` will deploy under the project path automatically.
