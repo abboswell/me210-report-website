@@ -30,11 +30,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: 20.12.2
+
+      - name: Show versions
+        run: |
+          node -v
+          npm -v
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Verify Vite installed
+        run: test -x node_modules/.bin/vite
 
       - name: Build
         run: npm run build
